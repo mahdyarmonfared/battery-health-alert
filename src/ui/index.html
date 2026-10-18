@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BatteryHealth-Alert Studio | 80/20 Longevity Guardian</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-group">
+        <div class="logo-icon">🔋</div>
+        <div>
+          <h1>BatteryHealth-Alert <span class="badge">STUDIO</span></h1>
+          <p class="subtitle">Zero-Dependency Battery Telemetry Monitor & 80/20 Longevity Guardian</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="port-indicator">● Port 3026</span>
+        <button id="audioToggleBtn" class="btn-ghost" title="Toggle Sound Alarms">🔊 Sound: ON</button>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="dashboard-grid">
+      <!-- Left Column: Visual Battery & Telemetry -->
+      <section class="card battery-hero-card">
+        <div class="battery-visual-wrapper">
+          <div class="battery-terminal"></div>
+          <div class="battery-outer-shell">
+            <div id="batteryLiquid" class="battery-liquid">
+              <div class="liquid-wave"></div>
+            </div>
+            <div class="battery-inner-content">
+              <span id="batteryIconBolt" class="bolt-icon">⚡</span>
+              <span id="batteryPercent" class="battery-number">--%</span>
+              <span id="batteryStateBadge" class="state-badge">DETECTING</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Stats Grid -->
+        <div class="telemetry-grid">
+          <div class="telemetry-item">
+            <span class="telemetry-label">Power Source</span>
+            <span id="statPowerSource" class="telemetry-val highlight-cyan">Checking...</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-label">Est. Runtime</span>
+            <span id="statRuntime" class="telemetry-val">--</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-label">Battery Health</span>
+            <span id="statHealth" class="telemetry-val highlight-green">--</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-label">System Platform</span>
+            <span id="statPlatform" class="telemetry-val">--</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: 80/20 Assessment & Threshold Controls -->
+      <section class="card assessment-card">
+        <h3>80/20 Longevity Assessment</h3>
+        <div id="assessmentBanner" class="assessment-banner banner-info">
+          <div class="banner-header">
+            <span id="assessmentIcon" class="banner-icon">ℹ️</span>
+            <strong id="assessmentTitle">Evaluating telemetry...</strong>
+          </div>
+          <p id="assessmentMsg" class="banner-body">Reading system battery state.</p>
+          <div id="assessmentRec" class="banner-footer">Recommendation will appear here.</div>
+        </div>
+
+        <div class="threshold-settings">
+          <h4>Longevity Thresholds (Rule of 80/20)</h4>
+          <p class="section-desc">Limiting charging to 80% and discharging to 20% extends lithium-ion battery lifecycle by up to 300%.</p>
+          
+          <div class="slider-row">
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="maxThresholdInput">Unplug Target (Max):</label>
+                <span id="maxThresholdVal" class="val-tag">80%</span>
+              </div>
+              <input type="range" id="maxThresholdInput" min="70" max="95" value="80" class="slider">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="minThresholdInput">Plug-in Target (Min):</label>
+                <span id="minThresholdVal" class="val-tag">20%</span>
+              </div>
+              <input type="range" id="minThresholdInput" min="15" max="35" value="20" class="slider">
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons-row">
+          <button id="testAlertBtn" class="btn-primary">🔔 Test Desktop Alert</button>
+          <button id="testBeepBtn" class="btn-ghost">🎵 Test Audio Alarm</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom: Simulation & History Sandbox -->
+    <section class="card simulation-card">
+      <div class="card-header-row">
+        <div>
+          <h3>Interactive Sandbox & Telemetry Simulator</h3>
+          <p class="section-desc">Test alert thresholds, simulate battery drain, or experiment with battery behaviors on desktop PCs.</p>
+        </div>
+        <div class="sim-toggle-wrapper">
+          <label class="toggle-switch">
+            <input type="checkbox" id="simModeToggle">
+            <span class="switch-slider"></span>
+          </label>
+          <span class="sim-toggle-label">Enable Simulation Sandbox</span>
+        </div>
+      </div>
+
+      <div id="simControlsContainer" class="sim-controls-panel disabled">
+        <div class="sim-preset-buttons">
+          <button class="btn-sim" data-sim-percent="15" data-sim-charging="false">🔴 Low (15% Drain)</button>
+          <button class="btn-sim" data-sim-percent="50" data-sim-charging="false">🟡 Optimal (50%)</button>
+          <button class="btn-sim" data-sim-percent="82" data-sim-charging="true">⚡ Overcharge (82% Charging)</button>
+          <button class="btn-sim" data-sim-percent="100" data-sim-charging="true">🟢 Full (100%)</button>
+        </div>
+
+        <div class="sim-slider-row">
+          <label for="simSlider">Manual Charge Level:</label>
+          <input type="range" id="simSlider" min="5" max="100" value="82" class="slider">
+          <span id="simSliderVal" class="val-tag">82%</span>
+          <label class="checkbox-label">
+            <input type="checkbox" id="simChargingCheckbox" checked>
+            <span>AC Power Connected</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Notification dispatched!</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
