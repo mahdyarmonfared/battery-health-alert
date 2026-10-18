@@ -1,0 +1,32 @@
+{
+  "name": "battery-health-alert",
+  "version": "1.0.0",
+  "description": "Zero-dependency smart battery telemetry monitor, 80/20 lifespan health guardian, and charger alarm notifier with cross-platform OS detection and an interactive Web Studio.",
+  "main": "src/core/index.js",
+  "bin": {
+    "battery-alert": "./bin/battery-alert.js",
+    "battery-health-alert": "./bin/battery-alert.js"
+  },
+  "scripts": {
+    "start": "node bin/battery-alert.js ui",
+    "test": "node --test test/**/*.test.js"
+  },
+  "keywords": [
+    "battery",
+    "battery-health",
+    "power-management",
+    "battery-monitor",
+    "telemetry",
+    "80-20-rule",
+    "charge-alarm",
+    "cross-platform",
+    "zero-dependency",
+    "cli",
+    "devtools"
+  ],
+  "author": "Mahdyar Monfared <mahdyar.monfared09@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
